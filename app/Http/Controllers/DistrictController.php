@@ -23,8 +23,7 @@ class DistrictController extends Controller
 
         return $districts;
 
-//        $districts = District::all();
-//        return response()->json($districts);
+
     }
 
     public function show($id)
