@@ -8,4 +8,8 @@ use PHPUnit\Framework\TestCase;
 class CompanyControllerTest extends TestCase
 {
 
+    public function testStore()
+    {
+
+    }
 }

@@ -29,3 +29,7 @@ use Illuminate\Support\Facades\Route;
      Route::get('/companies', [CompanyController::class, 'all']);
      Route::get('/CompanyBranches', [CompanyBranchController::class, 'All']);
      Route::get('/Districts', [DistrictController::class, 'All']);
+
+
+
+    Route::post('/company', [CompanyController::class,'store']);

@@ -39,4 +39,6 @@ class DistrictController extends Controller
         $Districts = District::all();
         return response()->json($Districts);
     }
+
+
 }
