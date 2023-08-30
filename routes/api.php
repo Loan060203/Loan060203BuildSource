@@ -21,6 +21,11 @@ use Illuminate\Support\Facades\Route;
     Route::get('/districts', [DistrictController::class, 'Index']);
     Route::get('/company-branches', [CompanyBranchController::class, 'index']);
 
+    Route::get('/company/{id}', [CompanyController::class, 'show']);
+    Route::get('/districts/{id}', [DistrictController::class, 'show']);
+    Route::get('/company-branches/{id}', [CompanyBranchController::class, 'show']);
 
 
-
+     Route::get('/companies', [CompanyController::class, 'all']);
+     Route::get('/CompanyBranches', [CompanyBranchController::class, 'All']);
+     Route::get('/Districts', [DistrictController::class, 'All']);

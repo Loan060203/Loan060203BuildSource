@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company\CompanyBranch;
 use App\Models\District;
 
 
@@ -13,13 +14,29 @@ class DistrictController extends Controller
     use HandleErrorException;
 
     //
-    public function Index()
+    public function Index(Request $request)
     {
-        $districts = District::all();
+        $perPage = $request->input('per_page', 2);
+        $currentPage = $request->input('page', 1);
+
+        $districts = District::paginate($perPage, ['*'], 'page', $currentPage);
+
+        return $districts;
+
+//        $districts = District::all();
+//        return response()->json($districts);
+    }
+
+    public function show($id)
+    {
+        $districts = District::findOrFail($id);
+
         return response()->json($districts);
     }
 
-
-
-
+    public  function  All()
+    {
+        $Districts = District::all();
+        return response()->json($Districts);
+    }
 }

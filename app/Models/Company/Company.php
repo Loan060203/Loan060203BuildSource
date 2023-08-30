@@ -28,6 +28,8 @@ class Company extends Model
         'use_flg'
     ];
 
+
+
     public function company_branches(): HasMany
     {
         return $this->hasMany(CompanyBranch::class);
