@@ -14,15 +14,11 @@ class CompanyController extends Controller
 {
     //
 
-    //use HasPagination;
 
     private $repository;
 
     public function index(Request $request)
     {
-//       $company = Company::all();
-//
-//       return response()->json($company);
 
         $perPage = $request->input('per_page', 2);
         $currentPage = $request->input('page', 1);
@@ -32,11 +28,6 @@ class CompanyController extends Controller
         return $company;
 
 
-
-
-//        $companies = $this->repository->findByFilters();
-//
-//        return $this->httpOk(new CompanyCollection($companies));
 
 
     }
