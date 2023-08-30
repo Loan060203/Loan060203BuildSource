@@ -26,8 +26,7 @@ class CompanyBranchController extends Controller
 
         return $branches;
 
-//        $branches = CompanyBranch::all();
-//        return response()->json($branches);
+
     }
     public function show($id)
     {
