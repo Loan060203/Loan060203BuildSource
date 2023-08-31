@@ -32,7 +32,7 @@ class Company extends Model
 
 
 
-    public function company_branches(): HasMany
+    public function branches(): HasMany
     {
         return $this->hasMany(CompanyBranch::class);
     }

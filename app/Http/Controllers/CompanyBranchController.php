@@ -18,28 +18,24 @@ class CompanyBranchController extends Controller
 
     public function index(Request $request)
     {
-
         $perPage = $request->input('per_page', 1);
         $currentPage = $request->input('page', 1);
-
         $branches = CompanyBranch::paginate($perPage, ['*'], 'page', $currentPage);
-
         return $branches;
 
 //        $branches = CompanyBranch::all();
 //        return response()->json($branches);
     }
-    public function show($id)
+    public function show($id): \Illuminate\Http\JsonResponse
     {
         $branches = CompanyBranch::findOrFail($id);
-
         return response()->json($branches);
     }
 
-    public  function  All()
+    public  function  all(): \Illuminate\Http\JsonResponse
     {
-        $CompanyBranches = CompanyBranch::all();
-        return response()->json($CompanyBranches);
+        $branches = CompanyBranch::all();
+        return response()->json($branches);
     }
 
 }

@@ -17,19 +17,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-    Route::get('/company', [CompanyController::class, 'index']);
-    Route::get('/districts', [DistrictController::class, 'Index']);
-    Route::get('/company-branches', [CompanyBranchController::class, 'index']);
+    Route::get('/companies', [CompanyController::class, 'index']);
+    Route::get('/districts', [DistrictController::class, 'index']);
+    Route::get('/company_branches', [CompanyBranchController::class, 'index']);
 
     Route::get('/company/{id}', [CompanyController::class, 'show']);
-    Route::get('/districts/{id}', [DistrictController::class, 'show']);
-    Route::get('/company-branches/{id}', [CompanyBranchController::class, 'show']);
+    Route::get('/district/{id}', [DistrictController::class, 'show']);
+    Route::get('/company_branch/{id}', [CompanyBranchController::class, 'show']);
 
+    Route::get('/companies/all/list', [CompanyController::class, 'all']);
+    Route::get('/company_branches/all/list', [CompanyBranchController::class, 'all']);
+    Route::get('/districts/all/list', [DistrictController::class, 'all']);
 
-     Route::get('/companies', [CompanyController::class, 'all']);
-     Route::get('/CompanyBranches', [CompanyBranchController::class, 'All']);
-     Route::get('/Districts', [DistrictController::class, 'All']);
-
-
-
-    Route::post('/company', [CompanyController::class,'store']);
+    //Route:get('/company/get/all', [CompanyController::class,'getAll']);
