@@ -44,6 +44,47 @@ class CompanyController extends Controller
     }
 
 
+    public function store(): void
+    {
+        $companies  = new company;
+        $companies ->classification = '6';
+        $companies ->code = '00006';
+        $companies ->name = 'biasg';
+        $companies ->yomigana = 'sai gon ';
+        $companies ->post = '541';
+        $companies ->address= 'tphcm';
+        $companies ->tel1 = '2365417743';
+        $companies ->fax = '154326';
+        $companies ->url ='http:/fffff';
+        $companies ->created_by = '999';
+        $companies ->updated_by ='15';
+        $companies ->updated_at = '2023-09-06 03:29:23';
+        $companies ->created_at = '2023-09-06 03:29:23';
+        $companies ->save();
+    }
+    public function update(): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
+    {
+        $companies  = Company::find (6);
+
+        $companies ->classification = '4';
+        $companies ->code = '00004';
+        $companies ->name = 'sgroup';
+        $companies ->yomigana = 'sai gon ';
+        $companies ->post = '511';
+        $companies ->address= 'dong nai';
+        $companies ->tel1 = '0513648792';
+        $companies ->fax = '6532491';
+        $companies ->url ='http:/ggggg';
+        $companies ->created_by = '999';
+        $companies ->updated_by ='15';
+        $companies ->updated_at = '2023-09-06 03:29:23';
+        $companies ->created_at = '2023-09-06 03:29:23';
+
+        $companies ->save();
+
+        return redirect('/company');
+    }
+
 
 
 

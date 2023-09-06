@@ -37,5 +37,45 @@ class CompanyBranchController extends Controller
         $branches = CompanyBranch::all();
         return response()->json($branches);
     }
+    public function store(): void
+    {
+        $branches= new CompanyBranch;
+
+        $branches->classification='4';
+        $branches->company_id='6';
+        $branches->code='0012';
+        $branches->name='groupsg';
+        $branches->yomigana='sai gon';
+        $branches->dsp_ord_num='1';
+        $branches->idv_mgmt='1';
+        $branches->use_flg='1';
+        $branches->created_by='999';
+        $branches->updated_by='15';
+        $branches->created_at='2023-09-06 03:29:23';
+        $branches->updated_at='2023-09-06 03:29:23';
+
+        $branches->save();
+    }
+    public function update(): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
+    {
+        $branches= CompanyBranch::find(4);
+
+        $branches->classification='4';
+        $branches->company_id='6';
+        $branches->code='0012';
+        $branches->name='batdongsan';
+        $branches->yomigana='bat dong san sai gon';
+        $branches->dsp_ord_num='1';
+        $branches->idv_mgmt='1';
+        $branches->use_flg='1';
+        $branches->created_by='999';
+        $branches->updated_by='15';
+        $branches->created_at='2023-09-06 03:29:23';
+        $branches->updated_at='2023-09-06 03:29:23';
+
+        $branches->save();
+        return redirect('/company');
+
+    }
 
 }
