@@ -30,8 +30,6 @@ class CompanyController extends Controller
         $companies = Company::with('branches')->paginate($perPage, ['*'], 'page', $currentPage);
         return $companies;
     }
-
-
     public function show($id): JsonResponse
     {
         $companies = Company::findOrFail($id);
@@ -42,25 +40,30 @@ class CompanyController extends Controller
         $companies = Company::all();
         return response()->json($companies);
     }
-
-
-    public function store(): void
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
+    public function store(CreateCompanyRequest $request): \Illuminate\Http\RedirectResponse
     {
+        $data = $request->validated();
         $companies  = new company;
-        $companies ->classification = '6';
-        $companies ->code = '00006';
-        $companies ->name = 'biasg';
-        $companies ->yomigana = 'sai gon ';
-        $companies ->post = '541';
-        $companies ->address= 'tphcm';
-        $companies ->tel1 = '2365417743';
-        $companies ->fax = '154326';
-        $companies ->url ='http:/fffff';
-        $companies ->created_by = '999';
-        $companies ->updated_by ='15';
-        $companies ->updated_at = '2023-09-06 03:29:23';
-        $companies ->created_at = '2023-09-06 03:29:23';
+
+        $companies->classification = $data['classification'];
+        $companies ->code = $data['code'];
+        $companies ->name = $data['name '];
+        $companies ->yomigana = $data['yomigana'];
+        $companies ->post = $data['post'];
+        $companies ->address= $data['address'];
+        $companies ->tel1 = $data['tel1'];
+        $companies ->fax = $data['fax'];
+        $companies ->url =$data['url'];
+        $companies ->created_by = $data['created_by'];
+        $companies ->updated_by =$data['updated_by'];
+
         $companies ->save();
+
+        return redirect()->route('companies.index')->with('success', 'Company created successfully');
     }
     public function update(): \Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {

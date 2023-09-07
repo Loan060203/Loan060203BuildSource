@@ -3,7 +3,7 @@
 namespace App\Http\Request;
 
 use App\Enums\CompanyTypeEnum;
-use App\Rules\Company\CompanyClassificationUnique;
+use App\Rules\CompanyClassificationUnique;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -15,7 +15,7 @@ class CreateCompanyRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return Auth::check();
     }
