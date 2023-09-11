@@ -16,10 +16,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/companies', [CompanyController::class, 'index']);
+Route::get('/districts', [DistrictController::class, 'index']);
+Route::get('/company_branches', [CompanyBranchController::class, 'index']);
 
-    Route::get('/company', [CompanyController::class, 'index']);
-    Route::get('/districts', [DistrictController::class, 'Index']);
-    Route::get('/company-branches', [CompanyBranchController::class, 'index']);
+Route::get('/company/{id}', [CompanyController::class, 'show']);
+Route::get('/district/{id}', [DistrictController::class, 'show']);
+Route::get('/company_branch/{id}', [CompanyBranchController::class, 'show']);
+
+Route::get('/companies/all/list', [CompanyController::class, 'all']);
+Route::get('/company_branches/all/list', [CompanyBranchController::class, 'all']);
+Route::get('/districts/all/list', [DistrictController::class, 'all']);
+
+//Route:get('/company/get/all', [CompanyController::class,'getAll']);
+//Route::post('/companies/store', [CompanyController::class, 'store']);
+//Route::put('/companies/update/{id}', [CompanyController::class, 'update']);
+//
+//Route::post('/company_branches/store', [CompanyBranchController::class, 'store']);
+//Route::put('/company_branches/update/{id}', [CompanyBranchController::class, 'update']);
 
 
 
