@@ -6,13 +6,20 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "bensampo/laravel-enum": "^4.0",
+        "doctrine/dbal": "^3.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.75",
+        "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",
+        "laravel/slack-notification-channel": "^2.4",
         "laravel/tinker": "^2.5",
-        "ext-mysql_xdevapi": "*",
-      "ext-http": "*"
+        "maatwebsite/excel": "^3.1",
+        "marcin-orlowski/laravel-api-response-builder": "^9.3",
+        "pelmered/fake-car": "^1.7",
+        "prettus/l5-repository": "^2.7",
+        "spatie/laravel-query-builder": "^4.0"
+
     },
     "require-dev": {
         "facade/ignition": "^2.5",

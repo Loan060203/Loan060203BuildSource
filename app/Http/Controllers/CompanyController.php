@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Request\CreateCompanyRequest;
 use App\Models\Company\Company;
-use http\Client\Request;
 use http\Client\Response;
+use Illuminate\Http\Request;
 
 
 class CompanyController extends Controller
@@ -28,10 +28,7 @@ class CompanyController extends Controller
         $companies = Company::all();
         return response()->json($companies);
     }
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
+
     public function store(CreateCompanyRequest $request): \Illuminate\Http\RedirectResponse
     {
         $data = $request->validated();

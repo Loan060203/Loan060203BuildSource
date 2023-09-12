@@ -4,8 +4,8 @@
 namespace App\Http\Request;
 
 use App\Enums\CompanyTypeEnum;
-use App\Rules\CompanyClassificationUnique;
-use Auth;
+use App\Rules\Company\CompanyClassificationUnique;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -29,7 +29,7 @@ class CreateCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'classification' => [Rule::in(CompanyTypeEnum::getValues()), new CompanyClassificationUnique],
+            'classification' => [Rule::in(CompanyTypeEnum::getValues())],
             'code' => ['max:50', 'string', 'required', Rule::unique('companies')],
             'name' => 'max:100|string',
             'yomigana' => 'string|nullable',
