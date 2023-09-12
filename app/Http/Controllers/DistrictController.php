@@ -30,12 +30,10 @@ class DistrictController extends Controller
         return response()->json($districts);
     }
 
-    public  function all(): \Illuminate\Http\JsonResponse
+    public function all(): \Illuminate\Http\JsonResponse
     {
         $districts = District::all();
         return response()->json($districts);
     }
-
-
 
 }

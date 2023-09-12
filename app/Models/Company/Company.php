@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Company extends Model
 {
     use HasFactory;
+
+    public mixed $idv_mgmt;
     protected $table='company';
     protected  $fillable=[
         'classification',
@@ -23,7 +25,7 @@ class Company extends Model
         'contact_name',
         'url',
         'dsp_ord_num',
-        'remask',
+        'remark',
         'idv_mgmt',
         'use_flg'
     ];

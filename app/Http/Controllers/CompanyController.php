@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Request\CreateCompanyRequest;
+use App\Http\Request\UpdateCompanyRequest;
 use App\Models\Company\Company;
+use App\Repositories\Company\CompanyRepository;
 use http\Client\Response;
 use Illuminate\Http\Request;
 
@@ -36,7 +38,7 @@ class CompanyController extends Controller
 
         $companies->classification = $data['classification'];
         $companies ->code = $data['code'];
-        $companies ->name = $data['name '];
+        $companies ->name = $data['name'];
         $companies ->yomigana = $data['yomigana'];
         $companies ->post = $data['post'];
         $companies ->address= $data['address'];
@@ -50,6 +52,29 @@ class CompanyController extends Controller
 
         return redirect()->route('companies.index')->with('success', 'Company created successfully');
     }
+    public function update(UpdateCompanyRequest $request, Company $companies,$id): \Illuminate\Http\RedirectResponse
+    {
+        $data = $request->validated();
+        $company = Company::findOrFail($id);
+        $company->update($data);
+
+        $companies->classification = $data['classification'];
+        $companies ->code = $data['code'];
+        $companies ->name = $data['name'];
+        $companies ->yomigana = $data['yomigana'];
+        $companies ->post = $data['post'];
+        $companies ->address= $data['address'];
+        $companies ->tel1 = $data['tel1'];
+        $companies ->fax = $data['fax'];
+        $companies ->url =$data['url'];
+        $companies ->created_by = $data['created_by'];
+        $companies ->updated_by =$data['updated_by'];
+
+        $companies ->save();
+
+        return redirect()->route('companies.index')->with('success', 'Company created successfully');
+    }
+
 
 
 

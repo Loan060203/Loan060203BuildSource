@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/companies', [CompanyController::class, 'index']);
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 Route::get('/districts', [DistrictController::class, 'index']);
 Route::get('/company_branches', [CompanyBranchController::class, 'index']);
 
@@ -30,10 +30,10 @@ Route::get('/districts/all/list', [DistrictController::class, 'all']);
 
 //Route:get('/company/get/all', [CompanyController::class,'getAll']);
 Route::post('/companies/store', [CompanyController::class, 'store']);
-//Route::put('/companies/update/{id}', [CompanyController::class, 'update']);
+Route::put('/companies/update/{id}', [CompanyController::class, 'update'])->name('companies.index');
 //
-//Route::post('/company_branches/store', [CompanyBranchController::class, 'store']);
-//Route::put('/company_branches/update/{id}', [CompanyBranchController::class, 'update']);
+Route::post('/company_branches/store', [CompanyBranchController::class, 'store'])->name('company_branches.index');
+Route::put('/company_branches/update/{id}', [CompanyBranchController::class, 'update'])->name('company_branches.update');
 
 
 

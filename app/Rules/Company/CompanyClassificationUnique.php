@@ -18,6 +18,11 @@ class CompanyClassificationUnique implements Rule
     }
     public function passes($attribute, $value): \Illuminate\Http\JsonResponse
     {
+        $classification = $this->data['classification'] ?? null;
+
+        if ($classification === null) {
+            return response()->json(false);
+        }
         $query = Company::query()
             ->where('classification', $this->data['classification'])
             ->where('classification', '<>', CompanyTypeEnum::OTHER);

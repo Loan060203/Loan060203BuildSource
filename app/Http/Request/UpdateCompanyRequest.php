@@ -1,24 +1,29 @@
 <?php
 
-
 namespace App\Http\Request;
 
 use App\Enums\CompanyTypeEnum;
 use App\Rules\Company\CompanyClassificationUnique;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateCompanyRequest extends FormRequest
+class UpdateCompanyRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+        'id' => $this->route('company') ? $this->route('company')['id'] : null,
+        ]);
     }
 
     /**
@@ -28,9 +33,10 @@ class CreateCompanyRequest extends FormRequest
      */
     public function rules()
     {
+        $companyId = $this->route('company') ? $this->route('company')['id'] : null;
         return [
-            'classification' => [Rule::in(CompanyTypeEnum::getValues())],
-            'code' => ['max:50', 'string', 'required', Rule::unique('company')],
+            'classification' => [Rule::in(CompanyTypeEnum::getValues()), new CompanyClassificationUnique],
+            'code' => ['max:50', 'string', 'required', Rule::unique('company')->ignore($companyId, 'id')],
             'name' => 'max:100|string',
             'yomigana' => 'string|nullable',
             'post' => 'max:8',
@@ -40,12 +46,10 @@ class CreateCompanyRequest extends FormRequest
             'fax' => 'max:13',
             'contact_name' => 'max:50',
             'url' => 'max:100',
-            'dsp_ord_num' => 'numeric',
             'remark' => 'string|nullable',
+            'dsp_ord_num' => 'numeric',
             'idv_mgmt' => 'boolean',
-            'use_flg' => 'boolean',
-            'created_by'=>'max:50',
-            'updated_by'=>'max:50'
+            'use_flg' => 'boolean'
             //
         ];
     }
