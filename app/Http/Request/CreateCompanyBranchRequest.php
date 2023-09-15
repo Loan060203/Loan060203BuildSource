@@ -17,7 +17,7 @@ class CreateCompanyBranchRequest extends FormRequest
     {
         return [
             'classification' => [Rule::in(CompanyBranchTypeEnum::getValues())],
-            'company_id' => 'required|numeric|exists:company,id',
+            'company_id' => 'required|numeric|exists:companíes,id',
             'code' => ['max:50', 'string', 'required', Rule::unique('company_branches')],
             'name' => 'max:100|string',
             'yomigana' => 'string|nullable',

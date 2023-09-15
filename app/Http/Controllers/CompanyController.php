@@ -36,13 +36,13 @@ class CompanyController extends Controller
     public function store(CreateCompanyRequest $request): \Illuminate\Http\JsonResponse
     {
         $data = $request->validated();
-        $company = Company::create($data);
+        $company = Company::query()->create($data);
         return response()->json($company);
     }
     public function update(UpdateCompanyRequest $request, int $id): \Illuminate\Http\JsonResponse
     {
         $data = $request->validated();
-        $company = Company::findOrFail($id);
+        $company = Company::query()->findOrFail($id);
         $company->update($data);
         return  response()->json($company);
     }

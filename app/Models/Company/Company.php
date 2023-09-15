@@ -9,13 +9,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @method static findOrFail(int $id)
  * @method static create(array $data)
+ * @method static seeder()
+ * @mixin IdeHelperCompany
  */
 class Company extends Model
 {
     use HasFactory;
 
     public mixed $idv_mgmt;
-    protected $table='company';
+    protected $table='companies';
     protected  $fillable=[
         'classification',
         'code',

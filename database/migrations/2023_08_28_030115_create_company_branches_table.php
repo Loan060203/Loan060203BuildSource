@@ -29,7 +29,7 @@ class CreateCompanyBranchesTable extends Migration
             $table->bigInteger('created_by')->unsigned()->index();
             $table->bigInteger('updated_by')->unsigned()->index();
 
-            $table->foreign('company_id')->references('id')->on('company')->cascadeOnDelete();
+            $table->foreign('company_id')->references('id')->on('companies')->cascadeOnDelete();
             $table->timestamps();
         });
     }

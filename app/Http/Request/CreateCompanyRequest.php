@@ -30,7 +30,7 @@ class CreateCompanyRequest extends FormRequest
     {
         return [
             'classification' => [Rule::in(CompanyTypeEnum::getValues())],
-            'code' => ['max:50', 'string', 'required', Rule::unique('company')],
+            'code' => ['max:50', 'string', 'required', Rule::unique('companies')],
             'name' => 'max:100|string',
             'yomigana' => 'string|nullable',
             'post' => 'max:8',

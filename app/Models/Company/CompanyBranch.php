@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static findOrFail($id)
  * @method static create(array $data)
  * @method static paginate(mixed $perPage, string[] $array, string $string, mixed $currentPage)
+ * @mixin IdeHelperCompanyBranch
  */
 class CompanyBranch extends Model
 {

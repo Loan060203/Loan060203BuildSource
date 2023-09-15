@@ -22,7 +22,7 @@ class UpdateCompanyRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-        'id' => $this->route('company') ? $this->route('company')['id'] : null,
+        'id' => $this->route('companies') ? $this->route('companies')['id'] : null,
         ]);
     }
 
@@ -33,10 +33,10 @@ class UpdateCompanyRequest extends FormRequest
      */
     public function rules()
     {
-        $companyId = $this->route('company') ? $this->route('company')['id'] : null;
+        $companyId = $this->route('companies') ? $this->route('companies')['id'] : null;
         return [
             'classification' => [Rule::in(CompanyTypeEnum::getValues()), new CompanyClassificationUnique],
-            'code' => ['max:50', 'string', 'required', Rule::unique('company')->ignore($companyId, 'id')],
+            'code' => ['max:50', 'string', 'required', Rule::unique('companies')->ignore($companyId, 'id')],
             'name' => 'max:100|string',
             'yomigana' => 'string|nullable',
             'post' => 'max:8',
