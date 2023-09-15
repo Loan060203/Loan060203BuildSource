@@ -17,11 +17,7 @@ class DistrictController extends Controller
     {
         $perPage = $request->input('per_page', 1);
         $currentPage = $request->input('page', 1);
-        $districts = District::paginate($perPage, ['*'], 'page', $currentPage);
-        return $districts;
-
-//        $districts = District::all();
-//        return response()->json($districts);
+        return District::paginate($perPage, ['*'], 'page', $currentPage);
     }
 
     public function show($id): \Illuminate\Http\JsonResponse

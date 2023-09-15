@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @method static findOrFail(int $id)
+ * @method static create(array $data)
+ */
 class Company extends Model
 {
     use HasFactory;
@@ -27,7 +31,9 @@ class Company extends Model
         'dsp_ord_num',
         'remark',
         'idv_mgmt',
-        'use_flg'
+        'use_flg',
+        'created_by',
+        'updated_by'
     ];
 
     public function branches(): HasMany

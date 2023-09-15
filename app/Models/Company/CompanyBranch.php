@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @method static findOrFail($id)
+ * @method static create(array $data)
+ * @method static paginate(mixed $perPage, string[] $array, string $string, mixed $currentPage)
+ */
 class CompanyBranch extends Model
 {
     use HasFactory;
@@ -30,7 +35,9 @@ class CompanyBranch extends Model
         'tel2',
         'fax',
         'contact_name',
-        'url'
+        'url',
+        'created_by',
+        'updated_by'
 
 
     ];

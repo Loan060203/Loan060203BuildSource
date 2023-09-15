@@ -7,13 +7,15 @@ use App\Http\Request\CreateCompanyRequest;
 use App\Http\Request\UpdateCompanyRequest;
 use App\Models\Company\Company;
 use App\Repositories\Company\CompanyRepository;
-use http\Client\Response;
+use Doctrine\DBAL\Query;
 use Illuminate\Http\Request;
 
 
+/**
+ * @property $repository
+ */
 class CompanyController extends Controller
 {
-
     public function index(Request $request): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         $perPage = $request->input('per_page', 1);
@@ -31,49 +33,20 @@ class CompanyController extends Controller
         return response()->json($companies);
     }
 
-    public function store(CreateCompanyRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(CreateCompanyRequest $request): \Illuminate\Http\JsonResponse
     {
         $data = $request->validated();
-        $companies  = new company;
-
-        $companies->classification = $data['classification'];
-        $companies ->code = $data['code'];
-        $companies ->name = $data['name'];
-        $companies ->yomigana = $data['yomigana'];
-        $companies ->post = $data['post'];
-        $companies ->address= $data['address'];
-        $companies ->tel1 = $data['tel1'];
-        $companies ->fax = $data['fax'];
-        $companies ->url =$data['url'];
-        $companies ->created_by = $data['created_by'];
-        $companies ->updated_by =$data['updated_by'];
-
-        $companies ->save();
-
-        return redirect()->route('companies.index')->with('success', 'Company created successfully');
+        $company = Company::create($data);
+        return response()->json($company);
     }
-    public function update(UpdateCompanyRequest $request, Company $companies,$id): \Illuminate\Http\RedirectResponse
+    public function update(UpdateCompanyRequest $request, int $id): \Illuminate\Http\JsonResponse
     {
         $data = $request->validated();
         $company = Company::findOrFail($id);
         $company->update($data);
-
-        $companies->classification = $data['classification'];
-        $companies ->code = $data['code'];
-        $companies ->name = $data['name'];
-        $companies ->yomigana = $data['yomigana'];
-        $companies ->post = $data['post'];
-        $companies ->address= $data['address'];
-        $companies ->tel1 = $data['tel1'];
-        $companies ->fax = $data['fax'];
-        $companies ->url =$data['url'];
-        $companies ->created_by = $data['created_by'];
-        $companies ->updated_by =$data['updated_by'];
-
-        $companies ->save();
-
-        return redirect()->route('companies.index')->with('success', 'Company created successfully');
+        return  response()->json($company);
     }
+
 
 
 

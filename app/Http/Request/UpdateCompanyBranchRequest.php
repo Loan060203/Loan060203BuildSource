@@ -24,7 +24,7 @@ class UpdateCompanyBranchRequest extends FormRequest
         return [
             'classification' => [Rule::in(CompanyBranchTypeEnum::getValues())],
             'company_id' => 'required|numeric|exists:company,id',
-            'code' => ['max:50', 'string', 'required', Rule::unique('company_branches')->ignore($this->CompanyBranch->id, 'id')],
+            'code' => ['max:50', 'string', 'required', Rule::unique('company_branches')->ignore(optional($this->CompanyBranch)->id, 'id')->ignore($this->route('company_branch'), 'id')],
             'name' => 'max:100|string',
             'yomigana' => 'string|nullable',
             'std_payment' => 'string|nullable',
@@ -40,6 +40,8 @@ class UpdateCompanyBranchRequest extends FormRequest
             'fax' => 'max:13',
             'contact_name' => 'max:50',
             'url' => 'max:100',
+            'created_by'=>'max:50',
+            'updated_by'=>'max:50'
             //
         ];
     }

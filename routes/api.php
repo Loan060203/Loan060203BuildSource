@@ -28,10 +28,9 @@ Route::get('/companies/all/list', [CompanyController::class, 'all']);
 Route::get('/company_branches/all/list', [CompanyBranchController::class, 'all']);
 Route::get('/districts/all/list', [DistrictController::class, 'all']);
 
-//Route:get('/company/get/all', [CompanyController::class,'getAll']);
 Route::post('/companies/store', [CompanyController::class, 'store']);
 Route::put('/companies/update/{id}', [CompanyController::class, 'update'])->name('companies.index');
-//
+
 Route::post('/company_branches/store', [CompanyBranchController::class, 'store'])->name('company_branches.index');
 Route::put('/company_branches/update/{id}', [CompanyBranchController::class, 'update'])->name('company_branches.update');
 

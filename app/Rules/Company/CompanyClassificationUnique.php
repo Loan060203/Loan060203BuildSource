@@ -4,7 +4,6 @@ namespace App\Rules\Company;
 
 use App\Enums\CompanyTypeEnum;
 use App\Models\Company\Company;
-use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\Rule;
 
 class CompanyClassificationUnique implements Rule
