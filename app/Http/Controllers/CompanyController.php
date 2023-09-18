@@ -18,9 +18,10 @@ class CompanyController extends Controller
 {
     public function index(Request $request): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-        $perPage = $request->input('per_page', 1);
+        $perPage = $request->input('per_page', 10);
         $currentPage = $request->input('page', 1);
-        return Company::with('branches')->paginate($perPage, ['*'], 'page', $currentPage);
+        $companies = Company::with('branches')->paginate($perPage, ['*'], 'page', $currentPage);
+        return $companies;
     }
     public function show($id): \Illuminate\Http\JsonResponse
     {

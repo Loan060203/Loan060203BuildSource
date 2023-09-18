@@ -14,7 +14,8 @@ class CompanyBranchController extends Controller
     {
         $perPage = $request->input('per_page', 1);
         $currentPage = $request->input('page', 1);
-        return CompanyBranch::paginate($perPage, ['*'], 'page', $currentPage);
+        $branches = CompanyBranch::paginate($perPage, ['*'], 'page', $currentPage);
+        return $branches;
     }
     public function show($id): \Illuminate\Http\JsonResponse
     {

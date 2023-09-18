@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Company\CompanyBranch;
+use App\Models\District;
 use Database\Seeders\CompanyBranchSeeder;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             //CompanySeeder::class,
             CompanyBranchSeeder::class,
+            //DistrictSeeder::class,
             ]);
     }
 }
