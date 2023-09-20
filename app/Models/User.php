@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @mixin IdeHelperUser
+ * @property mixed $login_id
  */
 class User extends Authenticatable
 {

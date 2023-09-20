@@ -4,9 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Company\Company;
 use App\Models\Company\CompanyBranch;
-use App\Models\Staff\Staff;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Arr;
 
 class CompanyBranchSeeder extends Seeder
 {

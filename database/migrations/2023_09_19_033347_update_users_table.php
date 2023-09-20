@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateCompanyBranchesTables extends Migration
+class UpdateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class UpdateCompanyBranchesTables extends Migration
      */
     public function up()
     {
-        Schema::table('company_branches', function (Blueprint $table) {
-            $table->string('fax', 13)->nullable();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('login_id')->unique();
+            $table->bigInteger('created_by')->unsigned()->index()->nullable();
+            $table->bigInteger('updated_by')->unsigned()->index()->nullable();
         });
     }
 

@@ -6,6 +6,7 @@ use App\Models\District;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class DistrictController extends Controller
@@ -17,19 +18,26 @@ class DistrictController extends Controller
     {
         $perPage = $request->input('per_page', 1);
         $currentPage = $request->input('page', 1);
-        return District::paginate($perPage, ['*'], 'page', $currentPage);
+        $districts= District::paginate($perPage, ['*'], 'page', $currentPage);
+
+        $queries = DB::getQueryLog();
+        return response()->json(['queries' => $queries,'data'=>$districts]);
     }
 
     public function show($id): \Illuminate\Http\JsonResponse
     {
         $districts = District::findOrFail($id);
-        return response()->json($districts);
+
+        $queries = DB::getQueryLog();
+        return response()->json(['queries' => $queries,'data'=>$districts]);
     }
 
     public function all(): \Illuminate\Http\JsonResponse
     {
         $districts = District::all();
-        return response()->json($districts);
+
+        $queries = DB::getQueryLog();
+        return response()->json(['queries' => $queries,'data'=>$districts]);
     }
 
 }

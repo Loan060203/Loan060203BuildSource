@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateComBranchesTable extends Migration
+class UpdateCompanyBranchesTable4 extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,7 @@ class UpdateComBranchesTable extends Migration
     public function up()
     {
         Schema::table('company_branches', function (Blueprint $table) {
-            $table->string('tel1', 13)->nullable();
-            $table->string('tel2', 13)->nullable();
-            $table->string('contact_name', 50)->nullable();
+            $table->string('url', 100)->nullable()->change();
         });
     }
 
@@ -27,6 +25,8 @@ class UpdateComBranchesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('company_branches', function (Blueprint $table) {
+            $table->string('url', 100)->nullable()->change();
+        });
     }
 }
