@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 
+
 class LogSqlQuery
 {
     /**
@@ -17,7 +18,7 @@ class LogSqlQuery
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\JsonResponse
      */
-    public function handle(Request $request, Closure $next): \Illuminate\Http\JsonResponse
+    public function handle(Request $request, Closure $next): JsonResponse
     {
         DB::enableQueryLog();
 
@@ -27,7 +28,7 @@ class LogSqlQuery
 
         $response->header('X-SQL-Queries', json_encode($queries));
         //$response = response()->json(['queries' => $queries]);
-
-        return $response;
+        //return $response;
+        return response()->json($response);
     }
 }
