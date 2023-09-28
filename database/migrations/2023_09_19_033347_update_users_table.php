@@ -27,6 +27,10 @@ class UpdateUsersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('login_id')->unique();
+            $table->bigInteger('created_by')->unsigned()->index()->nullable();
+            $table->bigInteger('updated_by')->unsigned()->index()->nullable();
+        });
     }
 }

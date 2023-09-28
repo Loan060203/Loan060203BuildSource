@@ -5,6 +5,7 @@ use App\Http\Controllers\CompanyBranchController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\SQLController;
+use App\Http\Controllers\UserControllers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('/execute_sql', [SQLController::class, 'executeSQL']);
+//Route::post('/execute_sql', [SQLController::class, 'executeSQL']);
 
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 //Route::middleware('log.sql.queries')->get('/companies', 'CompanyController@index');
@@ -38,4 +39,5 @@ Route::put('/companies/update/{id}', [CompanyController::class, 'update'])->name
 Route::post('/company_branches/store', [CompanyBranchController::class, 'store'])->name('company_branches.index');
 Route::put('/company_branches/update/{id}', [CompanyBranchController::class, 'update'])->name('company_branches.update');
 
-
+Route::post('register', [UserControllers::class, 'register'])->name('register');
+Route::post('login', [UserControllers::class, 'login'])->name('login');

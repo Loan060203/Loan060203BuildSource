@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Request\CreateCompanyBranchRequest;
 use App\Http\Request\UpdateCompanyBranchRequest;
+use App\Http\Resources\Company\CompanyResource;
+use App\Http\Resources\CompanyBranch\CompanyBranchResource;
 use App\Models\Company\CompanyBranch;
 use App\Repositories\Company\CompanyRepositoryInterface;
 use App\Repositories\CompanyBranch\CompanyBranchRepositoryInterface;
@@ -25,25 +27,37 @@ class CompanyBranchController extends Controller
         $currentPage = $request->input('page', 1);
 
         $branches = $this->CompanyBranchRepository->getAllBranches($perPage, $currentPage);
+        $companyBranchResource= CompanyBranchResource::collection($branches);
 
         $queries = DB::getQueryLog();
-        return response()->json(['queries' => $queries,'data'=>$branches]);
+        return response()->json([
+            'company' => $companyBranchResource,
+            'sql_query' => $queries,
+        ]);
 
     }
     public function show($id): \Illuminate\Http\JsonResponse
     {
         $branches = $this->CompanyBranchRepository->getById($id);
+        $companyBranchResource= new CompanyBranchResource($branches);
 
         $queries = DB::getQueryLog();
-        return response()->json(['queries' => $queries,'data'=>$branches]);
+        return response()->json([
+            'company' => $companyBranchResource,
+            'sql_query' => $queries,
+        ]);
     }
 
     public  function  all(): \Illuminate\Http\JsonResponse
     {
         $branches = $this->CompanyBranchRepository->getAll();
+        $companyBranchResource= CompanyBranchResource::collection($branches);
 
         $queries = DB::getQueryLog();
-        return response()->json(['queries' => $queries,'data'=>$branches]);
+        return response()->json([
+            'company' => $companyBranchResource,
+            'sql_query' => $queries,
+        ]);
     }
 
     public function store(CreateCompanyBranchRequest $request): \Illuminate\Http\JsonResponse

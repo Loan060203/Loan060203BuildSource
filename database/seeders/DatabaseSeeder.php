@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             //CompanySeeder::class,
             //CompanyBranchSeeder::class,
             //DistrictSeeder::class,
+            UserSeeder::class,
             ]);
     }
 }

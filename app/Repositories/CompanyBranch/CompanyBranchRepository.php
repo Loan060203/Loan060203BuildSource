@@ -12,6 +12,7 @@ class CompanyBranchRepository implements CompanyBranchRepositoryInterface
     {
         return CompanyBranch::all();
     }
+
     public function getById($id)
     {
         return CompanyBranch::findOrFail($id);
@@ -21,11 +22,13 @@ class CompanyBranchRepository implements CompanyBranchRepositoryInterface
     {
         return CompanyBranch::paginate($perPage, ['*'], 'page', $currentPage);
     }
+
     public function create(CreateCompanyBranchRequest $request): \Illuminate\Database\Eloquent\Model
     {
         $data = $request->validated();
         return CompanyBranch::create($data);
     }
+
     public function update(UpdateCompanyBranchRequest $request, int $id)
     {
         $data = $request->validated();

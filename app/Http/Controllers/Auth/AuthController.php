@@ -8,7 +8,7 @@ use App\Http\Request\Auth\RegisterUserRequest;
 use App\Http\Resources\Staff\StaffResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Repositories\AuthRepository;
+use App\Repositories\AuthRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;

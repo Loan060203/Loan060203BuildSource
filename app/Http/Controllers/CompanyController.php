@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Request\CreateCompanyRequest;
 use App\Http\Request\UpdateCompanyRequest;
-use App\Models\Company\Company;
+use App\Http\Resources\Company\CompanyCollection;
+use App\Http\Resources\Company\CompanyGetAllResource;
+use App\Http\Resources\Company\CompanyItemResource;
+use App\Http\Resources\Company\CompanyResource;
 use App\Repositories\Company\CompanyRepositoryInterface;
-use Doctrine\DBAL\Query;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,57 +19,65 @@ use Illuminate\Support\Facades\DB;
  */
 class CompanyController extends Controller
 {
-    protected CompanyRepositoryInterface $CompanyRepository;
+    protected CompanyRepositoryInterface $companyRepository;
 
-    public function __construct(CompanyRepositoryInterface $CompanyRepository)
+    public function __construct(CompanyRepositoryInterface $companyRepository)
     {
-        $this->CompanyRepository = $CompanyRepository;
+        $this->companyRepository = $companyRepository;
     }
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         $perPage = $request->input('per_page', 10);
         $currentPage = $request->input('page', 1);
 
-        $companies = $this->CompanyRepository->getAllWithBranches($perPage, $currentPage);
+        $companies = $this->companyRepository->getAllWithBranches($perPage, $currentPage);
+        $companyResource= CompanyResource::collection($companies);
 
         $queries = DB::getQueryLog();
-        return response()->json(['queries' => $queries,'data'=>$companies]);
+
+        return response()->json([
+            'company' => $companyResource,
+            'sql_query' => $queries,
+        ]);
     }
     public function show($id): \Illuminate\Http\JsonResponse
     {
-        $companies = $this->CompanyRepository->getById($id);
+        $company = $this->companyRepository->getById($id);
+        $companyResource = new CompanyResource($company);
 
         $queries = DB::getQueryLog();
-        return response()->json(['queries' => $queries,'data'=>$companies]);
+
+        return response()->json([
+            'company' => $companyResource,
+            'sql_query' => $queries,
+        ]);
     }
     public function all(): \Illuminate\Http\JsonResponse
     {
-        $companies = $this->CompanyRepository->getAll();
+        $companies = $this->companyRepository->getAll();
+        $companyGetAllResource = CompanyGetAllResource::collection($companies);
 
         $queries = DB::getQueryLog();
-        return response()->json(['queries' => $queries,'data'=>$companies]);
+
+        return response()->json([
+            'company' => $companyGetAllResource,
+            'sql_query' => $queries,
+        ]);
     }
 
     public function store(CreateCompanyRequest $request): \Illuminate\Http\JsonResponse
     {
-        $companies = $this->CompanyRepository->create($request);
+        $companies = $this->companyRepository->create($request);
 
         $queries = DB::getQueryLog();
         return response()->json(['queries' => $queries,'data'=>$companies]);
     }
     public function update(UpdateCompanyRequest $request, int $id): \Illuminate\Http\JsonResponse
     {
-        $company = $this->CompanyRepository->update($request, $id);
+        $company = $this->companyRepository->update($request, $id);
 
         $queries = DB::getQueryLog();
         return response()->json(['queries' => $queries,'data'=>$company]);
     }
-
-
-
-
-
-
-
 
 }
