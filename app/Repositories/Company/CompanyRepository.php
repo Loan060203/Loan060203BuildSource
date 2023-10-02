@@ -6,18 +6,20 @@ use App\Enums\CompanyTypeEnum;
 use App\Http\Request\CreateCompanyRequest;
 use App\Http\Request\UpdateCompanyRequest;
 use App\Models\Company\Company;
-
+use App\Support\Trait\HasPagination;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 
 class CompanyRepository implements CompanyRepositoryInterface
 {
+    use HasPagination;
     public function getAll(): array|\Illuminate\Database\Eloquent\Collection
     {
         return Company::all();
     }
-    public function getAllWithBranches($perPage, $currentPage): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    public function getAllWithBranches(): LengthAwarePaginator
     {
-        return Company::with('branches')->paginate($perPage, ['*'], 'page', $currentPage);
+        return Company::with('branches')->paginate($this->getPerPage());
     }
     public function getById($id)
     {

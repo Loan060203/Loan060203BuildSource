@@ -10,7 +10,7 @@ Interface CompanyBranchRepositoryInterface
 {
     public function getAll();
 
-    public function getAllBranches($perPage, $currentPage);
+    public function getAllBranches();
 
     public function getById($id);
 

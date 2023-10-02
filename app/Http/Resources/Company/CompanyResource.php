@@ -5,10 +5,6 @@ namespace App\Http\Resources\Company;
 use App\Enums\CommonEnum;
 use App\Http\Resources\Arrayable;
 use App\Http\Resources\CompanyBranch\CompanyBranchItemResource;
-use App\Http\Resources\Equipment\EquipmentItemResource;
-use App\Http\Resources\JsonSerializable;
-use App\Http\Resources\Staff\StaffItemResource;
-use App\Http\Resources\Vehicle\VehicleItemResource;
 use App\Models\Company\Company;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -40,7 +36,6 @@ class CompanyResource extends JsonResource
             'branches' => $this->whenLoaded('branches', function () {
                 return CompanyBranchItemResource::collection($this->branches);
             }, null),
-
         ];
     }
 }

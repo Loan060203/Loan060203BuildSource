@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Company\CompanyResource;
+use App\Http\Resources\District\DistrictCollection;
+use App\Http\Resources\District\DistrictResource;
 use App\Models\District;
 
 
@@ -22,15 +25,13 @@ class DistrictController extends Controller
         $this->DistrictRepository = $DistrictRepository;
     }
     //
-    public function index(Request $request)
+    public function index()
     {
-        $perPage = $request->input('per_page', 5);
-        $currentPage = $request->input('page', 1);
-
-        $districts= $this->DistrictRepository->getAllInPage($perPage, $currentPage);
+        $districts= $this->DistrictRepository->getAllInPage();
+        $districtResource= new DistrictCollection($districts);
 
         $queries = DB::getQueryLog();
-        return response()->json(['queries' => $queries,'data'=>$districts]);
+        return response()->json(['queries' => $queries,'data'=>$districtResource]);
     }
 
     public function show($id): \Illuminate\Http\JsonResponse

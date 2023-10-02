@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Route::post('/execute_sql', [SQLController::class, 'executeSQL']);
-
+//Route::middleware('query.log')->get('/companies', 'CompanyController.index');
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 //Route::middleware('log.sql.queries')->get('/companies', 'CompanyController@index');
 Route::get('/districts', [DistrictController::class, 'index']);

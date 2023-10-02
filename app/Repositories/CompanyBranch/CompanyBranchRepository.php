@@ -5,9 +5,12 @@ namespace App\Repositories\CompanyBranch;
 use App\Http\Request\CreateCompanyBranchRequest;
 use App\Http\Request\UpdateCompanyBranchRequest;
 use App\Models\Company\CompanyBranch;
+use App\Support\Trait\HasPagination;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CompanyBranchRepository implements CompanyBranchRepositoryInterface
 {
+    use HasPagination;
     public function getAll(): array|\Illuminate\Database\Eloquent\Collection
     {
         return CompanyBranch::all();
@@ -18,9 +21,9 @@ class CompanyBranchRepository implements CompanyBranchRepositoryInterface
         return CompanyBranch::findOrFail($id);
     }
 
-    public function getAllBranches($perPage, $currentPage)
+    public function getAllBranches():LengthAwarePaginator
     {
-        return CompanyBranch::paginate($perPage, ['*'], 'page', $currentPage);
+        return CompanyBranch::paginate($this->getPerPage());
     }
 
     public function create(CreateCompanyBranchRequest $request): \Illuminate\Database\Eloquent\Model

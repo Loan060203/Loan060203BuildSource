@@ -5,6 +5,7 @@ namespace App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * @method static findOrFail(int $id)
@@ -42,6 +43,12 @@ class Company extends Model
     {
         return $this->hasMany(CompanyBranch::class);
     }
+
+    public function branches_classification(): Collection
+    {
+        return $this->branches()->select('classification')->distinct()->get()->pluck('classification');
+    }
+
 
 
 

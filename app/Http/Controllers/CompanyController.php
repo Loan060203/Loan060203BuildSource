@@ -9,6 +9,7 @@ use App\Http\Resources\Company\CompanyCollection;
 use App\Http\Resources\Company\CompanyGetAllResource;
 use App\Http\Resources\Company\CompanyItemResource;
 use App\Http\Resources\Company\CompanyResource;
+use App\Http\Resources\CompanyBranch\CompanyBranchCollection;
 use App\Repositories\Company\CompanyRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,19 +26,16 @@ class CompanyController extends Controller
     {
         $this->companyRepository = $companyRepository;
     }
-    public function index(Request $request): \Illuminate\Http\JsonResponse
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        $perPage = $request->input('per_page', 10);
-        $currentPage = $request->input('page', 1);
-
-        $companies = $this->companyRepository->getAllWithBranches($perPage, $currentPage);
-        $companyResource= CompanyResource::collection($companies);
+        $companies = $this->companyRepository->getAllWithBranches();
+        $companyCollection= new CompanyCollection($companies);
 
         $queries = DB::getQueryLog();
 
         return response()->json([
-            'company' => $companyResource,
             'sql_query' => $queries,
+            'company' => $companyCollection,
         ]);
     }
     public function show($id): \Illuminate\Http\JsonResponse
@@ -48,8 +46,8 @@ class CompanyController extends Controller
         $queries = DB::getQueryLog();
 
         return response()->json([
-            'company' => $companyResource,
             'sql_query' => $queries,
+            'company' => $companyResource,
         ]);
     }
     public function all(): \Illuminate\Http\JsonResponse
@@ -60,8 +58,8 @@ class CompanyController extends Controller
         $queries = DB::getQueryLog();
 
         return response()->json([
-            'company' => $companyGetAllResource,
             'sql_query' => $queries,
+            'company' => $companyGetAllResource,
         ]);
     }
 

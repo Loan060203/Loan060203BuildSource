@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
+use Nette\Utils\Json;
 
 
 class LogSqlQuery
@@ -20,15 +21,14 @@ class LogSqlQuery
      */
     public function handle(Request $request, Closure $next): JsonResponse
     {
-        DB::enableQueryLog();
+        $showQueries = $request->header('X-Show-Queries', false);
 
-        $response = $next($request);
+        if ($showQueries) {
+            DB::enableQueryLog();
+        } else {
+            DB::disableQueryLog();
+        }
 
-        $queries = DB::getQueryLog();
-
-        $response->header('X-SQL-Queries', json_encode($queries));
-        //$response = response()->json(['queries' => $queries]);
-        //return $response;
-        return response()->json($response);
+        return $next($request);
     }
 }

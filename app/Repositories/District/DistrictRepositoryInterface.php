@@ -8,7 +8,7 @@ Interface DistrictRepositoryInterface
 {
     public function getAll();
 
-    public function getAllInPage($perPage, $currentPage);
+    public function getAllInPage();
 
     public function getById($id);
 

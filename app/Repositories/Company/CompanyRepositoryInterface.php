@@ -8,7 +8,7 @@ interface CompanyRepositoryInterface
 {
     public function getAll();
 
-    public function getAllWithBranches($perPage, $currentPage);
+    public function getAllWithBranches();
 
     public function getById($id);
 

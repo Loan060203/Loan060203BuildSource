@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Request\CreateCompanyBranchRequest;
 use App\Http\Request\UpdateCompanyBranchRequest;
 use App\Http\Resources\Company\CompanyResource;
+use App\Http\Resources\CompanyBranch\CompanyBranchCollection;
+use App\Http\Resources\CompanyBranch\CompanyBranchGetAllResource;
+use App\Http\Resources\CompanyBranch\CompanyBranchItemResource;
 use App\Http\Resources\CompanyBranch\CompanyBranchResource;
 use App\Models\Company\CompanyBranch;
 use App\Repositories\Company\CompanyRepositoryInterface;
@@ -21,42 +24,39 @@ class CompanyBranchController extends Controller
     {
         $this->CompanyBranchRepository = $CompanyBranchRepository;
     }
-    public function index(Request $request): \Illuminate\Http\JsonResponse
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        $perPage = $request->input('per_page', 10);
-        $currentPage = $request->input('page', 1);
-
-        $branches = $this->CompanyBranchRepository->getAllBranches($perPage, $currentPage);
-        $companyBranchResource= CompanyBranchResource::collection($branches);
+        $branches = $this->CompanyBranchRepository->getAllBranches();
+        $companyBranchCollection= new CompanyBranchCollection($branches);
 
         $queries = DB::getQueryLog();
         return response()->json([
-            'company' => $companyBranchResource,
             'sql_query' => $queries,
+            'branch' => $companyBranchCollection,
         ]);
 
     }
     public function show($id): \Illuminate\Http\JsonResponse
     {
         $branches = $this->CompanyBranchRepository->getById($id);
-        $companyBranchResource= new CompanyBranchResource($branches);
+        $CompanyBranchItemResource= new CompanyBranchItemResource($branches);
 
         $queries = DB::getQueryLog();
         return response()->json([
-            'company' => $companyBranchResource,
             'sql_query' => $queries,
+            'branch' => $CompanyBranchItemResource,
         ]);
     }
 
     public  function  all(): \Illuminate\Http\JsonResponse
     {
         $branches = $this->CompanyBranchRepository->getAll();
-        $companyBranchResource= CompanyBranchResource::collection($branches);
+        $CompanyBranchResource= CompanyBranchResource:: collection ($branches);
 
         $queries = DB::getQueryLog();
         return response()->json([
-            'company' => $companyBranchResource,
             'sql_query' => $queries,
+            'branch' => $CompanyBranchResource,
         ]);
     }
 
